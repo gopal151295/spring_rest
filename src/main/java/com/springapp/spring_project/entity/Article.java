@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 public class Article {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "title")
