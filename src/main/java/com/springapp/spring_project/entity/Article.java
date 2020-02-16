@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "article")
 public class Article {
     @Id
     @Column(name = "id")

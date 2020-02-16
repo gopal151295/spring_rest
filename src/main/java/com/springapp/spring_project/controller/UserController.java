@@ -1,6 +1,5 @@
 package com.springapp.spring_project.controller;
 
-import com.springapp.spring_project.dao.impl.UserDAOHibernateImpl;
 import com.springapp.spring_project.entity.User;
 import com.springapp.spring_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
