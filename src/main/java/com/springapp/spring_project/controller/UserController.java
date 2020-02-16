@@ -2,6 +2,7 @@ package com.springapp.spring_project.controller;
 
 import com.springapp.spring_project.dao.impl.UserDAOHibernateImpl;
 import com.springapp.spring_project.entity.User;
+import com.springapp.spring_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +15,15 @@ import java.util.List;
 public class UserController {
 
     // Dirty: inject UserDao (use constructor injection)
-    private UserDAOHibernateImpl userDAO;
+    private UserService userService;
 
     @Autowired
-    public UserController(UserDAOHibernateImpl userDAO) {
-        this.userDAO = userDAO;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/v1")
     public List<User> findAll(){
-        return userDAO.findAll();
+        return userService.findAll();
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -22,7 +21,6 @@ public class UserDAOHibernateImpl implements UserDAO {
     }
 
     @Override
-    @Transactional
     public List<User> findAll() {
         // get the current hibernate session
         Session session = entityManager.unwrap(Session.class);
@@ -35,5 +33,39 @@ public class UserDAOHibernateImpl implements UserDAO {
 
         // return the result
         return users;
+    }
+
+    @Override
+    public User findById(int id) {
+        // get the current session
+        Session session = entityManager.unwrap(Session.class);
+
+        // find user by id
+        User user = session.get(User.class, id);
+
+        // return the found user
+        return user;
+    }
+
+    @Override
+    public void save(User user) {
+        // get the current session
+        Session session = entityManager.unwrap(Session.class);
+
+        // save the user
+        session.saveOrUpdate(user);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        // get the current hibernate session
+        Session session = entityManager.unwrap(Session.class);
+
+        // create a query
+        Query<User> query = session.createQuery("delete from User where id=:userId", User.class);
+        query.setParameter("userId", id);
+
+        // execute the query
+        query.executeUpdate();
     }
 }
