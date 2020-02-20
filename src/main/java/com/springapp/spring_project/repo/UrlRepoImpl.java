@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Repository
 public class UrlRepoImpl implements UrlRepo {
@@ -22,6 +23,7 @@ public class UrlRepoImpl implements UrlRepo {
     @Override
     public void saveUrl(String key, String value) {
         valueOperations.set(key, value);
+        redisTemplate.expire(key, 604800,  TimeUnit.SECONDS);
     }
 
     @Override
